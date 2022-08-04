@@ -13,8 +13,14 @@ int main(int argc, char *argv[]) // argc argv 어플리케이션 터미널에서
     qDebug() << "isOpenDB : " << isOpenDB; // 파일열기 성공했는지 여부 출력
 
     qDebug() << QSqlDatabase::drivers(); //현재 환경에 어떤 DB Libarary가 설치되어 있는지 확인
-    qDebug() << "table 내용 : " << db;
+    qDebug() << "table 정보 : " << db;
 
+    QString queryStr; // 쿼리문을 전달할 변수
+    queryStr = QString("SELECT*FROM 'TB_PATIENT_INFO'"); // 쿼리문 저장
+    QSqlQuery query; // 데이터베이스에 전달할 쿼리 변수
+    query.prepare(queryStr); // 준비
+    //query.exec(); //실행
+    //qDebug() << query.exec() ;
 
 
 
