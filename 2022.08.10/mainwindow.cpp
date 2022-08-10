@@ -9,9 +9,9 @@ MainWindow::MainWindow(QWidget *parent) // 생성자
     ui->setupUi(this);
 
     QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("./TB_PATIENT_INFO.db");
+    mydb.setDatabaseName("C:/Users/Osstem/Documents/patient_management_program/PATIENT_INFO.db");
 
-    if(!mydb.isOpen())
+    if(!mydb.open())
         ui->label->setText("Failed to open the database");
     else
         ui->label->setText("Connected...");
@@ -32,3 +32,12 @@ MainWindow::~MainWindow()
 //{
 
 //}
+
+            //sqlite connect할 것
+
+// 저장 클릭할 경우 수행하는 일 정의 (
+void MainWindow::on_pushButton_save_clicked()
+{
+    //QString pntuid, pntname;
+}
+

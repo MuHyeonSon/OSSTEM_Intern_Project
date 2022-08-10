@@ -41,6 +41,11 @@ public:
     MainWindow(QWidget *parent = nullptr); // 생성자선언
     ~MainWindow(); //소멸자
 
+private slots:
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_save_clicked();
+
 private:
     Ui::MainWindow *ui;
 }; // 여기까지 MainWindow class 구현부
