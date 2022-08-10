@@ -24,7 +24,7 @@ public:
     bool connOpen()
     {
         QSqlDatabase mydb=QSqlDatabase::addDatabase("QSQLITE");
-        mydb.setDatabaseName("./TB_PATIENT_INFO.db");
+        mydb.setDatabaseName("./PATIENT_INFO.db");
 
         if(!mydb.open()){
             qDebug()<<("Failed to open database");
@@ -42,7 +42,6 @@ public:
     ~MainWindow(); //소멸자
 
 private slots:
-    void on_pushButton_2_clicked();
 
     void on_pushButton_save_clicked();
 
