@@ -11,6 +11,11 @@
 #include <QRegExp> //테이블 검색 filtering에 사용
 #include <QSortFilterProxyModel>
 #include <QApplication>
+#include <QCloseEvent> // 프로그램 종료시 이벤트
+
+
+//#include <QDataWidgetMapper>
+//#include <QStandardItemModel>
 
 // 함수 선언은 헤더에 구현은 cpp에? ㄴㄴㄴ -> 클래스 선언부와 구현부
 
@@ -39,7 +44,7 @@ public:
     {
         mydb.close();
         mydb.removeDatabase(QSqlDatabase::defaultConnection);
-        ui->label->setText("status");
+        ui->statusbar->showMessage("Status");
     }
     bool connOpen(QString path) // DB open(연결)하고 정상적으로 open 되었는지 여부 체크 함수 (멤버함수2)
     {
@@ -52,7 +57,7 @@ public:
 
         if(!mydb.open()){
             qDebug()<<("Failed to open the database");
-            ui->label->setText("Failed to open the database");
+            ui->statusbar->showMessage("Failed to open the database");
 
             return false;
         }
@@ -60,7 +65,7 @@ public:
             qDebug()<<("Connected...");
             qDebug()<< " mydb : " << mydb;
             //qDebug()<< " modal의 DB : " << modal->database() ;
-            ui->label->setText("Connected...");
+            ui->statusbar->showMessage("Connected...");
             return true;
         }
     };
@@ -101,7 +106,7 @@ public:
         qDebug() <<"the number of columns : "<<(modal->columnCount());
         if(modal->rowCount() == 0){
             connClose(); //DB연결 닫기
-            QMessageBox::critical(this,tr("오류"),tr("불러온 DB 파일의 Table이 row의 개수가 0입니다. DB 파일에서 불러올 Table 이름이 'TB_PATIENT_INFO_2'가 맞는지, column 헤더의 형식이 맞는지 확인 후 다시 시도하시오."));
+            QMessageBox::critical(this,tr("오류"),tr("형식에 맞지 않는 파일입니다."));
 
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -141,11 +146,20 @@ private slots:
 
     void on_pushButton_Load_DB_clicked();
 
+    void on_comboBox_currentTextChanged(const QString &arg1);
+
 private:
 
     Ui::MainWindow *ui;
 
     QString regxpattern ;
+
+    //QDataWidgetMapper *mapper;
+
+    //QStandardItemModel *model;
+
+protected:
+     void closeEvent(QCloseEvent *event); //프로그램 종료시 이벤트
 
 
 
